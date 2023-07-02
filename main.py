@@ -18,12 +18,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.datasets import load_iris
 
-from sample.general import LinearRegression
-from sample.general import LogisticRegression
-from sample.imshow import Imshow
-from sample.imshow import Scatter
-from sample.imshow import Line
+from sample.general.general import LinearRegression
+from sample.general.general import LogisticRegression
+from sample.general.imshow import Imshow
+from sample.general.imshow import Scatter
+from sample.general.imshow import Line
 from sklearn.linear_model import LogisticRegression as Logistic
+
 
 if __name__ == "__main__":
     # test linear regression

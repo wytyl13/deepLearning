@@ -57,9 +57,11 @@ import pandas as pd
 import tensorflow as tf
 import matplotlib.pyplot as plt
 import sys
+import os
+from pathlib import Path
 
-from sample.imshow import Scatter
-from sample.imshow import Line
+from sample.general.imshow import Scatter
+from sample.general.imshow import Line
 
 
 class Algorithm:
@@ -532,3 +534,38 @@ class LogisticRegression(LinearRegression):
         y_label = (-theta[0] - x_label * theta[1]) / theta[2]
         scatter = Scatter("scatter figure")
         scatter.imshow(self.inputData[:, 1:3], x_label, y_label)
+
+class GeneralOperation:
+    
+    def __init__(self) -> None:
+        pass
+
+    '''
+     * @Author: weiyutao
+     * @Date: 2023-07-02 09:25:13
+     * @Parameters: type: 0 get the current terminal path, 1 get the running file path.
+     * index: get the parent[index] path.
+     * relative: 0 get the absolute path, 1 get the relative path.
+     * @Return: result. the path what we want to get based on the parameters we have pass.
+     * @Description: print the current path or the running file path.
+     '''
+    def imshow_absolute_path(self, type = 0, index = None, relative = 0):
+        # define the absolute path for the current terminal running file path.
+        # that means it will return the absolute path where the file you are running is in.
+        # notice, it will not return the running file path and not the running terminal path.
+        # just like we have run the testGeneral file, but the FILE variable will return
+        # the path of the general.py what is the file that imshow_absolute_path is in.
+        # so FILE will return the file path of the class what you are running.
+        if type:
+            FILE = os.getcwd()
+        else:
+            FILE = Path(__file__).resolve()
+        # get the parent[i] directory path of the FILE based on the index i.
+        if index == None:
+            result = FILE
+        else:
+            result = FILE.parents[index]
+        if relative:
+            result = Path(os.path.relpath(result, Path.cwd()))
+        return result
+
